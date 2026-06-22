@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ZEMA TECHNOLOGIES - IA & Digital</title>
+    <meta
+      name="description"
+      content="ZEMA TECHNOLOGIES crée des sites web, applications mobiles, bots, agents IA, automatisations et solutions digitales pour particuliers, entreprises et organisations."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <symbol id="icon-rocket" viewBox="0 0 24 24"><path d="M5 15c-1.2 1-1.8 2.4-2 4.2 1.8-.2 3.2-.8 4.2-2"/><path d="M9 15 5.5 11.5c.7-2.6 2.3-5 4.5-6.7 2.2-1.8 5-2.8 8.5-2.8.1 3.5-.9 6.3-2.7 8.5A15 15 0 0 1 9 15Z"/><path d="m15 9 .1.1"/><path d="M9 15v4l3-3"/></symbol>
+      <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></symbol>
+      <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+      <symbol id="icon-brain" viewBox="0 0 24 24"><path d="M9 4a3 3 0 0 0-3 3v1a4 4 0 0 0 0 8v1a3 3 0 0 0 5 2.2V4.8A3 3 0 0 0 9 4Z"/><path d="M15 4a3 3 0 0 1 3 3v1a4 4 0 0 1 0 8v1a3 3 0 0 1-5 2.2V4.8A3 3 0 0 1 15 4Z"/><path d="M8 12h3M13 12h3"/></symbol>
+      <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 12 21 3"/></symbol>
+      <symbol id="icon-handshake" viewBox="0 0 24 24"><path d="m8 12 3 3a2 2 0 0 0 3 0l5-5"/><path d="M2 12 7 7l4 4"/><path d="m22 12-5-5-3 3"/><path d="m7 17-5-5"/></symbol>
+      <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+      <symbol id="icon-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+      <symbol id="icon-bot" viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="10" rx="3"/><path d="M12 8V4M9 13h.1M15 13h.1M8 18l-2 3M16 18l2 3"/></symbol>
+      <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h17"/><path d="M8 16v-5M13 16V8M18 16v-8"/></symbol>
+      <symbol id="icon-book" viewBox="0 0 24 24"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H20v17H7.5A3.5 3.5 0 0 0 4 22V5.5Z"/><path d="M4 19a3.5 3.5 0 0 1 3.5-3.5H20"/></symbol>
+      <symbol id="icon-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 12h18"/></symbol>
+      <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-8 0v2"/><circle cx="12" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.8M2 21v-2a4 4 0 0 1 3-3.8"/></symbol>
+      <symbol id="icon-graduation" viewBox="0 0 24 24"><path d="m2 8 10-5 10 5-10 5L2 8Z"/><path d="M6 10v5c2 2 10 2 12 0v-5"/><path d="M22 8v6"/></symbol>
+      <symbol id="icon-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></symbol>
+      <symbol id="icon-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2 3.4-.2-.1a1.7 1.7 0 0 0-2 .1 8 8 0 0 1-1.7.7 1.7 1.7 0 0 0-1.2 1.6V23H9.3v-.3a1.7 1.7 0 0 0-1.2-1.6 8 8 0 0 1-1.7-.7 1.7 1.7 0 0 0-2-.1l-.2.1-2-3.4.1-.1A1.7 1.7 0 0 0 2.6 15a8 8 0 0 1 0-2 1.7 1.7 0 0 0-.3-1.9l-.1-.1 2-3.4.2.1a1.7 1.7 0 0 0 2-.1 8 8 0 0 1 1.7-.7 1.7 1.7 0 0 0 1.2-1.6V5h3.4v.3a1.7 1.7 0 0 0 1.2 1.6 8 8 0 0 1 1.7.7 1.7 1.7 0 0 0 2 .1l.2-.1 2 3.4-.1.1a1.7 1.7 0 0 0-.3 1.9 8 8 0 0 1 0 2Z"/></symbol>
+    </svg>
+
+    <header class="site-header" aria-label="Navigation principale">
+      <a class="brand" href="#accueil" aria-label="ZEMA TECHNOLOGIES">
+        <img src="assets/zema-logo-transparent.png" alt="Logo ZEMA TECHNOLOGIES" />
+      </a>
+      <nav class="nav-links" aria-label="Sections du site">
+        <a href="offres.html">Offres</a>
+        <a href="produits.html">Produits</a>
+        <a href="process.html">Process</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <p class="site-credit">Site créé par ZEMA Technologies</p>
+      <div class="header-actions">
+        <div class="header-products" aria-label="Produits ZEMA">
+          <a href="produits.html#testor" title="Testor"><img src="assets/testor-logo-cropped.png" width="24" height="24" alt="Testor" /></a>
+          <a href="produits.html#cvboost" title="CVBoost"><img src="assets/cvboost-logo.png" width="24" height="24" alt="CVBoost" /></a>
+        </div>
+        <a class="header-cta" href="contact.html?type=devis">Demander un devis</a>
+      </div>
+    </header>
+
+    <main id="accueil">
+      <section class="hero section-band">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1>L'intelligence artificielle au service de votre <span>réussite.</span></h1>
+            <p class="hero-text">
+              Nous créons des sites web, applications, solutions digitales,
+              bots, agents IA et automatisations qui permettent aux
+              particuliers, entreprises et organisations de gagner du temps,
+              développer leur activité et transformer leurs idées en résultats.
+            </p>
+            <div class="hero-actions">
+              <a class="primary-btn" href="offres.html">Découvrir nos services</a>
+              <a class="secondary-btn" href="contact.html?type=devis">Demander un devis</a>
+            </div>
+            <div class="trust-strip" aria-label="Indicateurs ZEMA">
+              <span><svg><use href="#icon-handshake"></use></svg><strong>+120</strong><small>clients accompagnés</small></span>
+              <span><svg><use href="#icon-rocket"></use></svg><strong>+150</strong><small>solutions livrées</small></span>
+              <span><svg><use href="#icon-bolt"></use></svg><strong>24/7</strong><small>support réactif</small></span>
+            </div>
+          </div>
+
+          <div class="orbital-stage" aria-label="Domaines d'expertise ZEMA">
+            <div class="orbit-ring"></div>
+            <div class="glass-sphere">
+              <img src="assets/zema-logo-transparent.png" alt="" />
+            </div>
+            <div class="orbit-card card-web"><svg><use href="#icon-globe"></use></svg> Sites Web Premium</div>
+            <div class="orbit-card card-ai"><svg><use href="#icon-brain"></use></svg> Agents IA & Chatbots sur mesure</div>
+            <div class="orbit-card card-app"><svg><use href="#icon-phone"></use></svg> Applications Web & Mobile</div>
+            <div class="orbit-card card-auto"><svg><use href="#icon-bolt"></use></svg> Automatisation des processus d'entreprise</div>
+            <div class="orbit-card card-transform"><svg><use href="#icon-chart"></use></svg> Transformation Digitale</div>
+            <div class="orbit-card card-training"><svg><use href="#icon-graduation"></use></svg> Conseil & Formation IA</div>
+            <div class="orbit-card card-business"><svg><use href="#icon-briefcase"></use></svg> Création de solutions business IA</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="why section-band">
+        <div class="section-heading">
+          <p class="eyebrow">Pourquoi choisir ZEMA ?</p>
+          <h2>Des solutions <span>rapides</span>, fiables et orientées résultats.</h2>
+        </div>
+        <div class="feature-grid">
+          <article><span><svg><use href="#icon-rocket"></use></svg></span><h3>Innovation</h3><p>Les meilleurs outils IA pour créer des solutions modernes et performantes.</p></article>
+          <article><span><svg><use href="#icon-bolt"></use></svg></span><h3>Rapidité</h3><p>Des projets livrés avec une méthode claire, sans sacrifier la qualité.</p></article>
+          <article><span><svg><use href="#icon-lock"></use></svg></span><h3>Fiabilité</h3><p>Vos données, vos outils et votre image restent au centre du projet.</p></article>
+          <article><span><svg><use href="#icon-brain"></use></svg></span><h3>IA</h3><p>L'intelligence artificielle est intégrée là où elle crée un vrai avantage.</p></article>
+          <article><span><svg><use href="#icon-target"></use></svg></span><h3>Résultats</h3><p>Nous nous concentrons sur des solutions concrètes et mesurables.</p></article>
+          <article><span><svg><use href="#icon-handshake"></use></svg></span><h3>Accompagnement</h3><p>Un suivi humain avant, pendant et après la livraison de votre projet.</p></article>
+        </div>
+      </section>
+
+      <section id="offres" class="offers section-band">
+        <div class="section-heading">
+          <p class="eyebrow">Nos offres</p>
+          <h2>Des solutions intelligentes pour <span>chaque besoin.</span></h2>
+        </div>
+
+        <div class="offers-board">
+          <article class="offer-card offer-individual">
+            <div class="offer-pill">Pôle 1</div>
+            <div class="offer-title">
+              <span><svg><use href="#icon-users"></use></svg></span>
+              <div><h3>ZEMA</h3><h4>Individuel</h4></div>
+            </div>
+            <p>Pour les étudiants, lycéens, parents, enseignants, chercheurs d'emploi et toute personne en quête de progression personnelle.</p>
+            <ul>
+              <li><span><svg><use href="#icon-bot"></use></svg></span><div><strong>Testor</strong><small>Assistant éducatif intelligent sur WhatsApp.</small></div></li>
+              <li><span><svg><use href="#icon-file"></use></svg></span><div><strong>CV Boost</strong><small>Plateforme d'optimisation de CV pour passer les filtres ATS.</small></div></li>
+              <li><span><svg><use href="#icon-book"></use></svg></span><div><strong>Ebooks</strong><small>Guides complets sur l'emploi, l'IA et la productivité.</small></div></li>
+              <li><span><svg><use href="#icon-graduation"></use></svg></span><div><strong>Formation IA</strong><small>Apprendre à utiliser l'intelligence artificielle au quotidien.</small></div></li>
+            </ul>
+            <blockquote>On équipe avec les bons outils numériques et les bonnes connaissances.</blockquote>
+          </article>
+
+          <article class="offer-card offer-business">
+            <div class="offer-pill">Pôle 2</div>
+            <div class="offer-title">
+              <span><svg><use href="#icon-briefcase"></use></svg></span>
+              <div><h3>ZEMA</h3><h4>Business</h4></div>
+            </div>
+            <p>Pour les PME, entrepreneurs solo, boutiques, professions libérales et créateurs de contenu.</p>
+            <ul>
+              <li><span><svg><use href="#icon-globe"></use></svg></span><div><strong>Site vitrine IA</strong><small>Site professionnel moderne alimenté et optimisé par l'IA.</small></div></li>
+              <li><span><svg><use href="#icon-chart"></use></svg></span><div><strong>Site e-commerce</strong><small>Boutique complète avec gestion des produits et paiements.</small></div></li>
+              <li><span><svg><use href="#icon-phone"></use></svg></span><div><strong>Application mobile</strong><small>Création d'application iOS, Android ou PWA.</small></div></li>
+              <li><span><svg><use href="#icon-bot"></use></svg></span><div><strong>Bot & agent IA</strong><small>Assistant intelligent pour répondre, qualifier et vendre.</small></div></li>
+              <li><span><svg><use href="#icon-cog"></use></svg></span><div><strong>Automatisation</strong><small>Relances, rapports, leads, suivi et tâches répétitives.</small></div></li>
+              <li><span><svg><use href="#icon-users"></use></svg></span><div><strong>Community management</strong><small>Création de contenu et stratégie de communication digitale.</small></div></li>
+            </ul>
+            <blockquote>On digitalise votre entreprise, on automatise ce qui vous fait perdre du temps.</blockquote>
+          </article>
+
+          <article class="offer-card offer-corporate">
+            <div class="offer-pill">Pôle 3</div>
+            <div class="offer-title">
+              <span><svg><use href="#icon-chart"></use></svg></span>
+              <div><h3>ZEMA</h3><h4>Corporate</h4></div>
+            </div>
+            <p>Pour les grandes sociétés, ONG, organismes internationaux et institutions.</p>
+            <ul>
+              <li><span><svg><use href="#icon-bot"></use></svg></span><div><strong>Agent IA sur mesure</strong><small>Conception et déploiement d'un agent IA complet.</small></div></li>
+              <li><span><svg><use href="#icon-target"></use></svg></span><div><strong>Audit & conseil</strong><small>Analyse stratégique et feuille de route IA.</small></div></li>
+              <li><span><svg><use href="#icon-users"></use></svg></span><div><strong>Formation équipe</strong><small>Installation d'outils IA et formation des équipes.</small></div></li>
+              <li><span><svg><use href="#icon-lock"></use></svg></span><div><strong>Produit white-label</strong><small>Version personnalisée aux couleurs de votre organisation.</small></div></li>
+              <li><span><svg><use href="#icon-brain"></use></svg></span><div><strong>Prompt engineering</strong><small>Prompts et workflows IA pour maximiser la performance.</small></div></li>
+            </ul>
+            <blockquote>On intègre l'intelligence artificielle au coeur de vos processus.</blockquote>
+          </article>
+        </div>
+      </section>
+
+      <section id="produits" class="products section-band">
+        <div class="section-heading">
+          <p class="eyebrow">Nos créations certifiées ZEMA Technologies</p>
+          <h2>Deux solutions à fort impact qui aident actuellement <span>des centaines d'utilisateurs tous les jours.</span></h2>
+        </div>
+        <div class="product-grid">
+          <article class="product-card testor">
+            <img src="assets/testor-logo-cropped.png" alt="Logo Testor" />
+            <div>
+              <h3>Testor</h3>
+              <p>Apprendre, progresser et réviser avec un assistant éducatif intelligent sur WhatsApp.</p>
+              <ul>
+                <li>Réponses instantanées</li>
+                <li>Explications claires</li>
+                <li>Disponible 24/7</li>
+              </ul>
+              <a href="produits.html#testor">En savoir plus sur Testor</a>
+            </div>
+          </article>
+          <article class="product-card cvboost">
+            <img src="assets/cvboost-logo.png" alt="Logo CVBoost" />
+            <div>
+              <h3>CVBoost</h3>
+              <p>Optimiser votre CV pour les ATS, améliorer la clarté et augmenter vos chances d'entretien.</p>
+              <ul>
+                <li>Analyse ATS</li>
+                <li>Suggestions personnalisées</li>
+                <li>CV professionnel</li>
+              </ul>
+              <a href="produits.html#cvboost">En savoir plus sur CVBoost</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="process" class="process section-band">
+        <div class="section-heading">
+          <p class="eyebrow">Notre méthode</p>
+          <h2>Votre projet avance en <span>5 étapes</span> simples.</h2>
+        </div>
+        <div class="timeline">
+          <article><span><svg><use href="#icon-file"></use></svg></span><h3>Analyse</h3><p>Nous clarifions vos besoins, votre audience et vos objectifs.</p></article>
+          <article><span><svg><use href="#icon-target"></use></svg></span><h3>Conception</h3><p>Nous préparons la structure, le parcours et les fonctionnalités.</p></article>
+          <article><span><svg><use href="#icon-cog"></use></svg></span><h3>Développement</h3><p>Nous construisons une solution propre, responsive et évolutive.</p></article>
+          <article><span><svg><use href="#icon-rocket"></use></svg></span><h3>Livraison</h3><p>Nous testons, corrigeons et mettons votre solution en ligne.</p></article>
+          <article><span><svg><use href="#icon-handshake"></use></svg></span><h3>Accompagnement</h3><p>Nous restons disponibles pour améliorer, former et optimiser.</p></article>
+        </div>
+      </section>
+
+      <section class="clients section-band" aria-label="Ils nous ont fait confiance">
+        <div class="section-heading">
+          <p class="eyebrow">Ils nous ont fait confiance</p>
+          <h2>Des marques et projets accompagnés par <span>ZEMA Technologies.</span></h2>
+          <p>
+            Restaurants, consulting, vente, services et projets digitaux : nous
+            accompagnons des activités qui veulent aller plus vite, mieux communiquer
+            et transformer leurs idées en solutions concrètes.
+          </p>
+        </div>
+        <div class="client-carousel" aria-label="Logos de clients et partenaires">
+          <div class="client-track">
+            <div class="client-logo"><img src="assets/client-etb.png" alt="ETB Consulting International" /></div>
+            <div class="client-logo"><img src="assets/client-otakkos.jpg" alt="O'TAKKOS" /></div>
+            <div class="client-logo"><img src="assets/client-as-mercedes.png" alt="AS Mercedes" /></div>
+            <div class="client-logo"><img src="assets/client-etb.png" alt="" /></div>
+            <div class="client-logo"><img src="assets/client-otakkos.jpg" alt="" /></div>
+            <div class="client-logo"><img src="assets/client-as-mercedes.png" alt="" /></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="founder section-band">
+        <div class="founder-copy">
+          <img class="founder-logo" src="assets/zema-logo-full.png" alt="Logo ZEMA Technologies" />
+          <p class="eyebrow">Message ZEMA</p>
+          <h2>Bonjour et merci de faire confiance à <span>ZEMA Technologies.</span></h2>
+          <p>
+            Chaque projet commence souvent par une idée simple : gagner du temps,
+            mieux présenter son activité, automatiser une tâche, vendre plus facilement
+            ou créer une solution qui donne enfin forme à une ambition. Chez ZEMA
+            Technologies, nous transformons cette idée en expérience digitale claire,
+            moderne et utile.
+          </p>
+          <p>
+            Notre rôle est d'écouter, de comprendre votre réalité, puis de construire
+            avec vous des sites, applications, agents IA, automatisations et produits
+            numériques capables de produire un impact concret au quotidien.
+          </p>
+        </div>
+        <div class="mission-grid">
+          <article><span><svg><use href="#icon-rocket"></use></svg></span><h3>Notre mission</h3><p>Apporter des solutions digitales et IA qui créent de la valeur réelle.</p></article>
+          <article><span><svg><use href="#icon-target"></use></svg></span><h3>Notre vision</h3><p>Devenir une référence en solutions IA et digitales en Afrique et dans le monde.</p></article>
+          <article><span><svg><use href="#icon-handshake"></use></svg></span><h3>Nos valeurs</h3><p>Innovation, fiabilité, accompagnement et excellence.</p></article>
+        </div>
+      </section>
+
+      <section id="contact" class="contact section-band">
+        <div>
+          <p class="eyebrow">Démarrer maintenant</p>
+          <h2>Transformez votre idée en <span>projet concret.</span></h2>
+          <p>
+            Décrivez votre besoin et recevez une première orientation claire :
+            technologie recommandée, estimation budgétaire et prochaines étapes.
+          </p>
+        </div>
+        <form class="contact-form mail-form" data-subject="Analyse de projet IA - ZEMA Technologies">
+          <label>
+            Nom
+            <input type="text" name="name" placeholder="Votre nom" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" placeholder="votre@email.com" required />
+          </label>
+          <label>
+            Numéro
+            <input type="tel" name="phone" placeholder="+225 ..." required />
+          </label>
+          <label>
+            Type de demande
+            <select name="request_type" required>
+              <option value="Analyse de projet IA">Analyse de projet IA</option>
+              <option value="Demande de devis">Demande de devis</option>
+              <option value="Avis client">Avis client</option>
+              <option value="Autre demande">Autre demande</option>
+            </select>
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="4" placeholder="Ex : je veux automatiser mes relances clients..." required></textarea>
+          </label>
+          <button type="submit">Envoyer à ZEMA Technologies</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <img src="assets/zema-logo-transparent.png" alt="Logo ZEMA TECHNOLOGIES" />
+        <p>L'intelligence artificielle et le digital au service de votre réussite.</p>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <p>+225 07 15 18 35 68</p>
+        <p>Contact.zematechnologies@gmail.com</p>
+        <p>Cocody, Abidjan - Côte d'Ivoire</p>
+      </div>
+    </footer>
+
+    <a class="whatsapp" href="https://wa.me/2250715183568" target="_blank" rel="noopener" onclick="window.open(this.href, '_blank', 'noopener'); return false;" aria-label="Contact WhatsApp ZEMA">WA</a>
+    <script src="script.js?v=3"></script>
+  </body>
+</html>

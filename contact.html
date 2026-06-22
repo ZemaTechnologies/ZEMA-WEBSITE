@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact - ZEMA TECHNOLOGIES</title>
+    <meta
+      name="description"
+      content="Contactez ZEMA TECHNOLOGIES pour un avis, une demande de devis ou une analyse de projet IA."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" aria-label="Navigation principale">
+      <a class="brand" href="index.html" aria-label="ZEMA TECHNOLOGIES">
+        <img src="assets/zema-logo-transparent.png" alt="Logo ZEMA TECHNOLOGIES" />
+      </a>
+      <nav class="nav-links" aria-label="Sections du site">
+        <a href="offres.html">Offres</a>
+        <a href="produits.html">Produits</a>
+        <a href="process.html">Process</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+      <p class="site-credit">Site créé par ZEMA Technologies</p>
+      <div class="header-actions">
+        <div class="header-products" aria-label="Produits ZEMA">
+          <a href="produits.html#testor" title="Testor"><img src="assets/testor-logo-cropped.png" width="24" height="24" alt="Testor" /></a>
+          <a href="produits.html#cvboost" title="CVBoost"><img src="assets/cvboost-logo.png" width="24" height="24" alt="CVBoost" /></a>
+        </div>
+        <a class="header-cta" href="contact.html?type=devis">Demander un devis</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="contact-page section-band">
+        <div class="contact-panel">
+          <div class="contact-info">
+            <p class="eyebrow">Contact ZEMA</p>
+            <h1>Parlons de votre projet, de votre avis ou de votre besoin.</h1>
+            <p>
+              Utilisez le formulaire pour envoyer une demande de devis, une
+              analyse de projet IA, un avis client ou toute autre demande.
+            </p>
+
+            <div class="contact-methods">
+              <article>
+                <span>Email</span>
+                <a href="mailto:contact.zematechnologies@gmail.com">contact.zematechnologies@gmail.com</a>
+              </article>
+              <article>
+                <span>Téléphone</span>
+                <a href="tel:+2250715183568">+225 07 15 18 35 68</a>
+              </article>
+              <article>
+                <span>Localisation</span>
+                <p>Cocody, Abidjan - Côte d'Ivoire</p>
+              </article>
+            </div>
+          </div>
+
+          <form class="contact-form contact-page-form mail-form" data-subject="Nouveau message depuis le site ZEMA">
+            <label>
+              Nom
+              <input type="text" name="name" placeholder="Votre nom" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="votre@email.com" required />
+            </label>
+            <label>
+              Numéro
+              <input type="tel" name="phone" placeholder="+225 ..." required />
+            </label>
+            <label>
+              Type de demande
+              <select name="request_type" required>
+                <option value="Demande de devis">Demande de devis</option>
+                <option value="Analyse de projet IA">Analyse de projet IA</option>
+                <option value="Avis client">Avis client</option>
+                <option value="Autre demande">Autre demande</option>
+              </select>
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows="6" placeholder="Écrivez votre avis, votre demande de devis ou votre projet..." required></textarea>
+            </label>
+            <button type="submit">Envoyer le message</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <img src="assets/zema-logo-transparent.png" alt="Logo ZEMA TECHNOLOGIES" />
+        <p>L'intelligence artificielle et le digital au service de votre réussite.</p>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <p>+225 07 15 18 35 68</p>
+        <p>Contact.zematechnologies@gmail.com</p>
+        <p>Cocody, Abidjan - Côte d'Ivoire</p>
+      </div>
+    </footer>
+
+    <a class="whatsapp" href="https://wa.me/2250715183568" target="_blank" rel="noopener" onclick="window.open(this.href, '_blank', 'noopener'); return false;" aria-label="Contact WhatsApp ZEMA">WA</a>
+    <script src="script.js?v=3"></script>
+  </body>
+</html>

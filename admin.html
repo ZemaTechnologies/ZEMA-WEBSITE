@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin - ZEMA TECHNOLOGIES</title>
+    <meta
+      name="description"
+      content="Tableau de bord local pour suivre les visites et les habitudes des visiteurs du site ZEMA TECHNOLOGIES."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="admin-body">
+    <header class="site-header admin-header" aria-label="Navigation admin">
+      <a class="brand" href="admin.html" aria-label="Administration ZEMA TECHNOLOGIES">
+        <img src="assets/zema-logo-transparent.png" alt="Logo ZEMA TECHNOLOGIES" />
+      </a>
+      <p class="admin-private-label">Espace privé</p>
+    </header>
+
+    <main class="admin-login section-band" data-admin-login>
+      <form class="admin-login-card" data-admin-login-form>
+        <p class="eyebrow">Accès administrateur</p>
+        <h1>Connexion <span>ZEMA.</span></h1>
+        <p>Entrez vos accès pour consulter les statistiques privées du site.</p>
+        <label>
+          Identifiant
+          <input name="username" type="text" autocomplete="username" required />
+        </label>
+        <label>
+          Mot de passe
+          <input name="password" type="password" autocomplete="current-password" required />
+        </label>
+        <p class="admin-login-error" data-admin-login-error></p>
+        <button class="primary-btn" type="submit">Se connecter</button>
+      </form>
+    </main>
+
+    <main class="admin-dashboard section-band is-hidden" data-admin-dashboard>
+      <section class="admin-hero">
+        <p class="eyebrow">Tableau de bord</p>
+        <h1>Suivi des visites et des <span>habitudes visiteurs.</span></h1>
+        <p>
+          Cette page affiche les statistiques collectées localement sur ce navigateur :
+          visites, pages consultées, clics, formulaires et appareils utilisés.
+        </p>
+      </section>
+
+      <section class="admin-metrics" aria-label="Indicateurs principaux">
+        <article><span>Total visites</span><strong data-stat="totalVisits">0</strong></article>
+        <article><span>Pages vues</span><strong data-stat="pageViews">0</strong></article>
+        <article><span>Messages reçus</span><strong data-stat="messages">0</strong></article>
+        <article><span>Clics suivis</span><strong data-stat="clicks">0</strong></article>
+        <article><span>Temps moyen</span><strong data-stat="avgTime">0s</strong></article>
+      </section>
+
+      <section class="admin-grid">
+        <article class="admin-panel admin-messages-panel">
+          <h2>Messages reçus</h2>
+          <div class="admin-messages" data-admin-messages></div>
+        </article>
+        <article class="admin-panel">
+          <h2>Pages les plus consultées</h2>
+          <div class="admin-list" data-admin-list="pages"></div>
+        </article>
+        <article class="admin-panel">
+          <h2>Actions des visiteurs</h2>
+          <div class="admin-list" data-admin-list="clicks"></div>
+        </article>
+        <article class="admin-panel">
+          <h2>Appareils utilisés</h2>
+          <div class="admin-list" data-admin-list="devices"></div>
+        </article>
+        <article class="admin-panel">
+          <h2>Activité récente</h2>
+          <div class="admin-list" data-admin-list="recent"></div>
+        </article>
+      </section>
+
+      <section class="admin-panel admin-wide">
+        <h2>Résumé comportemental</h2>
+        <div class="admin-insights" data-admin-insights></div>
+      </section>
+
+      <div class="admin-actions">
+        <button class="secondary-btn" type="button" data-admin-refresh>Actualiser</button>
+        <button class="primary-btn" type="button" data-admin-reset>Réinitialiser les données</button>
+        <button class="secondary-btn" type="button" data-admin-logout>Se déconnecter</button>
+      </div>
+    </main>
+
+    <script src="script.js?v=3"></script>
+  </body>
+</html>
