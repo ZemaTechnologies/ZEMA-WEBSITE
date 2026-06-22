@@ -213,6 +213,17 @@ const observer = new IntersectionObserver(
 
 animatedBlocks.forEach((block) => observer.observe(block));
 
+const clientCarousel = document.querySelector(".client-carousel");
+if (clientCarousel) {
+  const carouselObserver = new IntersectionObserver(
+    ([entry]) => {
+      clientCarousel.classList.toggle("is-active", entry.isIntersecting);
+    },
+    { threshold: 0.25 }
+  );
+  carouselObserver.observe(clientCarousel);
+}
+
 const requestTypeLabels = {
   devis: "Demande de devis",
   analyse: "Analyse de projet IA",
@@ -310,9 +321,7 @@ document.querySelectorAll(".mail-form").forEach((form) => {
     existingNotice?.remove();
     const notice = document.createElement("p");
     notice.className = "form-success";
-    notice.textContent = remoteSaved
-      ? "Message envoyé avec succès. ZEMA Technologies vous répondra rapidement."
-      : "Message enregistré. La synchronisation en ligne sera vérifiée par ZEMA Technologies.";
+    notice.textContent = "Votre message a \u00e9t\u00e9 envoy\u00e9. Notre \u00e9quipe vous contactera bient\u00f4t";
     form.appendChild(notice);
   });
 });

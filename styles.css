@@ -745,6 +745,17 @@ h3 {
     #f8fbff;
 }
 
+.why,
+.offers,
+.products,
+.process,
+.clients,
+.founder,
+.contact {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
 .offers-board {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -761,7 +772,8 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 24px 70px rgba(6, 17, 38, 0.1);
+  box-shadow: 0 14px 38px rgba(6, 17, 38, 0.08);
+  contain: layout paint;
 }
 
 .offer-individual { border-color: rgba(7, 92, 255, 0.32); }
@@ -1201,6 +1213,12 @@ h3 {
   width: max-content;
   padding: 18px;
   animation: clientSlide 18s linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+
+.client-carousel.is-active .client-track {
+  animation-play-state: running;
 }
 
 .client-carousel:hover .client-track {
@@ -1255,7 +1273,8 @@ h3 {
   background:
     radial-gradient(circle at 70% 20%, rgba(7, 92, 255, 0.12), transparent 20rem),
     linear-gradient(135deg, #ffffff 0%, #f5f9ff 100%);
-  box-shadow: 0 18px 54px rgba(6, 17, 38, 0.08);
+  box-shadow: 0 14px 36px rgba(6, 17, 38, 0.07);
+  contain: layout paint;
 }
 
 .contact h2 {
