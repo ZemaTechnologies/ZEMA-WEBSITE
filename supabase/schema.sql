@@ -58,3 +58,65 @@ on public.site_events
 for select
 to authenticated
 using (true);
+
+create or replace function public.zema_admin_dashboard(
+  p_username text,
+  p_password text
+)
+returns json
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if p_username <> 'admin' or p_password <> 'admin' then
+    raise exception 'Acces refuse';
+  end if;
+
+  return json_build_object(
+    'messages',
+    coalesce(
+      (
+        select json_agg(row_to_json(message_rows))
+        from (
+          select
+            id,
+            name,
+            email,
+            phone,
+            request_type,
+            message,
+            page,
+            status,
+            created_at
+          from public.contact_messages
+          order by created_at desc
+          limit 100
+        ) message_rows
+      ),
+      '[]'::json
+    ),
+    'events',
+    coalesce(
+      (
+        select json_agg(row_to_json(event_rows))
+        from (
+          select
+            id,
+            event_type,
+            label,
+            page,
+            device,
+            created_at
+          from public.site_events
+          order by created_at desc
+          limit 500
+        ) event_rows
+      ),
+      '[]'::json
+    )
+  );
+end;
+$$;
+
+grant execute on function public.zema_admin_dashboard(text, text) to anon;

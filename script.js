@@ -1,6 +1,8 @@
 const analyticsKey = "zema_site_analytics_v1";
 const sessionKey = "zema_site_session_v1";
 const messagesKey = "zema_site_messages_v1";
+const supabaseUrl = "https://blftvzfmskjevnhbvkwp.supabase.co";
+const supabaseAnonKey = "sb_publishable_oocF5us8UVWaKd0ppaSUnw_yJXPXlu1";
 
 const getAnalytics = () => {
   try {
@@ -24,6 +26,76 @@ const getMessages = () => {
 
 const saveMessages = (messages) => {
   localStorage.setItem(messagesKey, JSON.stringify(messages));
+};
+
+const supabaseRequest = async (path, options = {}) => {
+  if (!supabaseUrl || !supabaseAnonKey) return null;
+
+  const url = new URL(`${supabaseUrl}/rest/v1/${path}`);
+  Object.entries(options.query || {}).forEach(([key, value]) => {
+    url.searchParams.set(key, value);
+  });
+
+  const response = await fetch(url.toString(), {
+    method: options.method || "GET",
+    headers: {
+      apikey: supabaseAnonKey,
+      Authorization: `Bearer ${supabaseAnonKey}`,
+      "Content-Type": "application/json",
+      Prefer: options.prefer || "return=representation",
+    },
+    body: options.body ? JSON.stringify(options.body) : undefined,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Supabase error ${response.status}`);
+  }
+
+  if (response.status === 204) return null;
+  return response.json();
+};
+
+const saveRemoteEvent = async (type, label) => {
+  if (isAdminPage) return;
+  await supabaseRequest("site_events", {
+    method: "POST",
+    prefer: "return=minimal",
+    body: {
+      event_type: type,
+      label: label || readablePage(location.pathname),
+      page: readablePage(location.pathname),
+      device: getDeviceType(),
+    },
+  });
+};
+
+const saveRemoteMessage = async (messageData) => {
+  await supabaseRequest("contact_messages", {
+    method: "POST",
+    prefer: "return=minimal",
+    body: {
+      name: messageData.name,
+      email: messageData.email,
+      phone: messageData.phone,
+      request_type: messageData.requestType,
+      message: messageData.message,
+      page: messageData.page,
+      status: messageData.status || "Nouveau",
+    },
+  });
+};
+
+const getRemoteAdminData = async () => {
+  const username = sessionStorage.getItem("zema_admin_username") || "";
+  const password = sessionStorage.getItem("zema_admin_password") || "";
+  const result = await supabaseRequest("rpc/zema_admin_dashboard", {
+    method: "POST",
+    body: {
+      p_username: username,
+      p_password: password,
+    },
+  });
+  return Array.isArray(result) ? result[0] : result;
 };
 
 const escapeHtml = (value) =>
@@ -91,6 +163,7 @@ const track = (type, label) => {
   });
   data.recent = data.recent.slice(0, 12);
   saveAnalytics(data);
+  saveRemoteEvent(type, label).catch(() => {});
 };
 
 const currentSession = sessionStorage.getItem(sessionKey);
@@ -170,7 +243,7 @@ document.querySelectorAll(".mail-form").forEach((form) => {
     }
   }
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     requiredFields.forEach((field) => field.setCustomValidity(""));
@@ -202,8 +275,7 @@ document.querySelectorAll(".mail-form").forEach((form) => {
       return;
     }
 
-    const messages = getMessages();
-    messages.unshift({
+    const newMessage = {
       id: Date.now(),
       name,
       email,
@@ -213,8 +285,20 @@ document.querySelectorAll(".mail-form").forEach((form) => {
       page: readablePage(location.pathname),
       date: new Date().toISOString(),
       status: "Nouveau",
-    });
+    };
+
+    const messages = getMessages();
+    messages.unshift(newMessage);
     saveMessages(messages.slice(0, 100));
+
+    let remoteSaved = false;
+    try {
+      await saveRemoteMessage(newMessage);
+      remoteSaved = true;
+    } catch (error) {
+      console.warn("Message sauvegardé localement, Supabase indisponible.", error);
+    }
+
     track("form", requestType);
 
     form.reset();
@@ -226,7 +310,9 @@ document.querySelectorAll(".mail-form").forEach((form) => {
     existingNotice?.remove();
     const notice = document.createElement("p");
     notice.className = "form-success";
-    notice.textContent = "Message envoyé avec succès. ZEMA Technologies vous répondra rapidement.";
+    notice.textContent = remoteSaved
+      ? "Message envoyé avec succès. ZEMA Technologies vous répondra rapidement."
+      : "Message enregistré. La synchronisation en ligne sera vérifiée par ZEMA Technologies.";
     form.appendChild(notice);
   });
 });
@@ -250,38 +336,90 @@ const listFromObject = (object, emptyText) => {
     .join("");
 };
 
-const renderAdmin = () => {
+const countBy = (items, key) =>
+  items.reduce((counts, item) => {
+    const value = item[key] || "Non renseigné";
+    counts[value] = (counts[value] || 0) + 1;
+    return counts;
+  }, {});
+
+const renderAdmin = async () => {
   const root = document.querySelector("[data-admin-dashboard]");
   if (!root) return;
   const data = getAnalytics();
-  const messages = getMessages();
-  const pageViews = data.pageViews || 0;
-  const clicks = Object.values(data.clickCounts || {}).reduce((sum, value) => sum + value, 0);
+  let messages = getMessages();
+  let remoteEvents = [];
+
+  try {
+    const remoteData = await getRemoteAdminData();
+    if (remoteData?.messages) {
+      messages = remoteData.messages.map((item) => ({
+        id: item.id,
+        name: item.name,
+        email: item.email,
+        phone: item.phone,
+        requestType: item.request_type,
+        message: item.message,
+        page: item.page,
+        status: item.status,
+        date: item.created_at,
+      }));
+    }
+    if (remoteData?.events) {
+      remoteEvents = remoteData.events;
+    }
+  } catch (error) {
+    console.warn("Lecture Supabase impossible, affichage local.", error);
+  }
+
+  const remoteClicks = remoteEvents.filter((event) => event.event_type === "click").length;
+  const remotePageViews = remoteEvents.filter((event) => event.event_type === "pageview").length;
+  const remotePageCounts = countBy(
+    remoteEvents.filter((event) => event.event_type === "pageview"),
+    "page"
+  );
+  const remoteClickCounts = countBy(
+    remoteEvents.filter((event) => event.event_type === "click" || event.event_type === "form"),
+    "label"
+  );
+  const remoteDeviceCounts = countBy(
+    remoteEvents.filter((event) => event.event_type === "pageview"),
+    "device"
+  );
+  const pageViews = remotePageViews || data.pageViews || 0;
+  const clicks = remoteClicks || Object.values(data.clickCounts || {}).reduce((sum, value) => sum + value, 0);
   const avgTime = pageViews ? Math.round((data.totalSeconds || 0) / pageViews) : 0;
 
-  root.querySelector('[data-stat="totalVisits"]').textContent = data.totalVisits || 0;
+  root.querySelector('[data-stat="totalVisits"]').textContent = remotePageViews || data.totalVisits || 0;
   root.querySelector('[data-stat="pageViews"]').textContent = pageViews;
   root.querySelector('[data-stat="messages"]').textContent = messages.length;
   root.querySelector('[data-stat="clicks"]').textContent = clicks;
   root.querySelector('[data-stat="avgTime"]').textContent = avgTime < 60 ? `${avgTime}s` : `${Math.round(avgTime / 60)}min`;
 
   root.querySelector('[data-admin-list="pages"]').innerHTML = listFromObject(
-    data.pageCounts,
+    remotePageViews ? remotePageCounts : data.pageCounts,
     "Aucune page consultée pour le moment."
   );
   root.querySelector('[data-admin-list="clicks"]').innerHTML = listFromObject(
-    data.clickCounts,
+    remoteClicks ? remoteClickCounts : data.clickCounts,
     "Aucune action suivie pour le moment."
   );
   root.querySelector('[data-admin-list="devices"]').innerHTML = listFromObject(
-    data.deviceCounts,
+    remotePageViews ? remoteDeviceCounts : data.deviceCounts,
     "Aucun appareil détecté pour le moment."
   );
-  root.querySelector('[data-admin-list="recent"]').innerHTML = (data.recent || [])
-    .slice(0, 8)
+  const recentItems = remoteEvents.length
+    ? remoteEvents.slice(0, 8).map((event) => ({
+        label: event.label || event.page || event.event_type,
+        page: event.page,
+        date: event.created_at,
+        type: event.event_type,
+      }))
+    : (data.recent || []).slice(0, 8);
+  root.querySelector('[data-admin-list="recent"]').innerHTML = recentItems
     .map(
       (item) =>
-        `<div class="admin-row"><span>${item.label}<small>${item.page} - ${formatDate(item.date)}</small></span><strong>${item.type}</strong></div>`
+        `<div class="admin-row"><span>${escapeHtml(item.label)}<small>${escapeHtml(item.page)} - ${formatDate(item.date)}</small></span><strong>${escapeHtml(item.type)}</strong></div>`
     )
     .join("") || `<p class="admin-empty">Aucune activité récente.</p>`;
 
@@ -307,9 +445,9 @@ const renderAdmin = () => {
       : `<p class="admin-empty">Aucun message reçu pour le moment.</p>`;
   }
 
-  const topPage = Object.entries(data.pageCounts || {}).sort((a, b) => b[1] - a[1])[0];
-  const topAction = Object.entries(data.clickCounts || {}).sort((a, b) => b[1] - a[1])[0];
-  const topDevice = Object.entries(data.deviceCounts || {}).sort((a, b) => b[1] - a[1])[0];
+  const topPage = Object.entries(remotePageViews ? remotePageCounts : data.pageCounts || {}).sort((a, b) => b[1] - a[1])[0];
+  const topAction = Object.entries(remoteClicks ? remoteClickCounts : data.clickCounts || {}).sort((a, b) => b[1] - a[1])[0];
+  const topDevice = Object.entries(remotePageViews ? remoteDeviceCounts : data.deviceCounts || {}).sort((a, b) => b[1] - a[1])[0];
   root.querySelector("[data-admin-insights]").innerHTML = [
     `Dernière visite : ${formatDate(data.lastVisit)}`,
     `Page la plus consultée : ${topPage ? `${topPage[0]} (${topPage[1]})` : "pas encore de tendance"}`,
@@ -354,6 +492,8 @@ const setupAdminAccess = () => {
 
     if (username === "admin" && password === "admin") {
       sessionStorage.setItem("zema_admin_auth", "true");
+      sessionStorage.setItem("zema_admin_username", username);
+      sessionStorage.setItem("zema_admin_password", password);
       showDashboard();
       return;
     }
@@ -365,6 +505,8 @@ const setupAdminAccess = () => {
 
   document.querySelector("[data-admin-logout]")?.addEventListener("click", () => {
     sessionStorage.removeItem("zema_admin_auth");
+    sessionStorage.removeItem("zema_admin_username");
+    sessionStorage.removeItem("zema_admin_password");
     location.reload();
   });
 };
